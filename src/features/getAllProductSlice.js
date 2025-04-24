@@ -1,42 +1,44 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
-import axios from 'axios'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
-    products : [],
-    errors : "",
+    products: [],
+    errors: "",
     loading: false,
-}
+};
 
-const fetchProducts = createAsyncThunk("products", async () => {
-    axios.get("https://fakestoreapi.com/products").then((response) => {
-        return response;
-    }).catch((error) => {
-        return error;
-
-        // console.log(error)
-    })
-})
+export const fetchProducts = createAsyncThunk(
+    "products/fetchProducts",  // Better naming convention
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await axios.get("https://fakestoreapi.com/products");
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data || "Failed to fetch products");
+        }
+    }
+);
 
 const getAllProductSlice = createSlice({
     name: "products",
     initialState,
     extraReducers: (builder) => {
-        builder.addCase(builder.pending, (state, action) => {
-            state.loading = true;
-        })
-        builder.addCase(builder.fulfilled, (state, action) => {
-            state.loading = false;
-            state.products = action.payload;
-            state.errors = "";
-
-        })
-        builder.addCase(builder.reject, (state, action) => {
-            state.loading = false;
-            state.products = [];
-            state.errors = action.payload;
-        })
+        builder
+            .addCase(fetchProducts.pending, (state) => {
+                state.loading = true;
+                state.errors = "";
+            })
+            .addCase(fetchProducts.fulfilled, (state, action) => {
+                state.loading = false;
+                state.products = action.payload;
+                state.errors = "";
+            })
+            .addCase(fetchProducts.rejected, (state, action) => {
+                state.loading = false;
+                state.products = [];
+                state.errors = action.payload;
+            });
     }
-})
+});
 
-export default getAllProductSlice.reducer
-export {fetchProducts}
+export default getAllProductSlice.reducer;
