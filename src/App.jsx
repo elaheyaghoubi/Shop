@@ -1,8 +1,11 @@
 import React from 'react'
+import Header from "./components/shared/Header.jsx";
 
 function App() {
     return (
-        <div>App</div>
+        <div>
+            <Header />
+        </div>
     )
 }
 

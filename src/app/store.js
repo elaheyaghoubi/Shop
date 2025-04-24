@@ -5,6 +5,4 @@ const store = configureStore({
         products : getAllProductSlice,
     }
 })
-
-
 export default store;
