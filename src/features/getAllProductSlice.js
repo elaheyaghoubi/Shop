@@ -8,7 +8,7 @@ const initialState = {
 };
 
 export const fetchProducts = createAsyncThunk(
-    "products/fetchProducts",  // Better naming convention
+    "products/fetchProducts",
     async () => {
         try {
             const response = await axios.get("https://fakestoreapi.com/products");

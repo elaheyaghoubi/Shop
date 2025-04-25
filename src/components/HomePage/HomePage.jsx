@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../features/getAllProductSlice.js";
 import { ClipLoader } from "react-spinners";
 import ProductCard from "./ProductCard.jsx";
+import Loading from "../shared/Loading.jsx";
 
 function HomePage() {
     const { loading, products, error } = useSelector((state) => state.products);
@@ -11,6 +12,7 @@ function HomePage() {
     useEffect(() => {
         dispatch(fetchProducts());
     }, []);
+
     return (
         <div className={"p-[1em]"}>
             <div className={""}>
@@ -18,20 +20,7 @@ function HomePage() {
                 <div className={"bg-sky-600 w-[100%] h-[3px] rounded-2xl"}></div>
             </div>
             <div>
-                <div className={"text-center"}>
-                    <ClipLoader
-                        color={"#000"}
-                        loading={loading}
-                        cssOverride={{
-                            borderWidth: "3px",
-                            borderColor: "#2a0eaa #2a0eaa transparent",
-                            animation: "1s linear 0s infinite normal both running react-spinners-ClipLoader-clip"
-                        }}
-                        size={30}
-                        aria-label="Loading Spinner"
-                        data-testid="loader"
-                    />
-                </div>
+                <Loading loading={loading}/>
                 {error ? (<div>Error: {error}</div>) : null}
                 <div className={"grid grid-cols-4 gap-4 m-[1em]"}>
                     {products.length ? products.map((product) => (

@@ -3,6 +3,7 @@ import Header from "./components/shared/Header.jsx";
 import Footer from "./components/shared/Footer.jsx";
 import {Routes, Route } from "react-router-dom";
 import HomePage from "./components/HomePage/HomePage.jsx";
+import DetailsPage from "./components/DetailsPage/DetailsPage.jsx";
 
 function App() {
     return (
@@ -10,6 +11,7 @@ function App() {
             <Header />
             <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/products/:id" element={<DetailsPage />} />
             </Routes>
             <Footer />
         </div>
