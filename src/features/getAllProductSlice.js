@@ -9,12 +9,12 @@ const initialState = {
 
 export const fetchProducts = createAsyncThunk(
     "products/fetchProducts",  // Better naming convention
-    async (_, { rejectWithValue }) => {
+    async () => {
         try {
             const response = await axios.get("https://fakestoreapi.com/products");
             return response.data;
         } catch (error) {
-            return rejectWithValue(error.response?.data || "Failed to fetch products");
+            return error;
         }
     }
 );
@@ -37,6 +37,7 @@ const getAllProductSlice = createSlice({
                 state.loading = false;
                 state.products = [];
                 state.errors = action.payload;
+
             });
     }
 });
