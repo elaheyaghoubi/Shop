@@ -14,13 +14,12 @@ function DetailsPage() {
     useEffect(() => {
         id ? dispatch(fetchDetails(id)) : null;
     }, [id, dispatch]);
-    console.log(details)
 
     return (
         <div>
             <Loading loading={loading}/>
             <div>
-                {details.length ? (<DetailCard details={details}/>) : null}
+                {details ? (<DetailCard data={details}/>) : null}
             </div>
         </div>
     );

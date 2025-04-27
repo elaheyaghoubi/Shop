@@ -4,12 +4,12 @@ import axios from "axios";
 const initialState = {
     loading: false,
     error: "",
-    details: []
+    details: {}
 }
 
 const fetchDetails = createAsyncThunk("details/fetchDetails", async (id) => {
     try {
-        console.log(id)
+        // console.log(id)
         const response = await axios.get(`https://fakestoreapi.com/products/${id}`);
         return response.data;
     }catch (error) {
