@@ -1,49 +1,57 @@
-import React from 'react'
+import React from 'react';
 import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
-import {addToCart, increase, decrease, removeFromCart} from "../../features/cartSlice.js";
-import {useSelector, useDispatch} from "react-redux";
-import {counter, isInCart} from "../../functions/function.js";
-// import button from "bootstrap/js/src/button.js";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    addToCart,
+    increaseQuantity,
+    decreaseQuantity,
+    removeFromCart
+} from "../../features/cartSlice";
 
-function Buttons({product}) {
-    const cart = useSelector(state => state.cart);
+function Buttons({ product }) {
     const dispatch = useDispatch();
-    // console.log(product)
+    const cart = useSelector(state => state.cart.cart);
+    const quantity = cart.find(item => item.id === product.id)?.quantity || 0;
+
     return (
-        <div>
-            {counter(cart, product.id) === 1 && (
-                <button onClick={() => dispatch(removeFromCart(cart, product.id))}>
-                    <FaTrash size={15} />
+        <div className="flex items-center gap-2">
+            {quantity > 0 ? (
+                <>
+                    <button
+                        onClick={() => dispatch(decreaseQuantity(product.id))}
+                        className="p-1 hover:bg-gray-100 rounded"
+                    >
+                        <FaMinus size={15} />
+                    </button>
+
+                    <span>{quantity}</span>
+
+                    <button
+                        onClick={() => dispatch(increaseQuantity(product.id))}
+                        className="p-1 hover:bg-gray-100 rounded"
+                    >
+                        <FaPlus size={15} />
+                    </button>
+
+                    {quantity === 1 && (
+                        <button
+                            onClick={() => dispatch(removeFromCart(product.id))}
+                            className="p-1 text-red-500 hover:bg-red-50 rounded"
+                        >
+                            <FaTrash size={15} />
+                        </button>
+                    )}
+                </>
+            ) : (
+                <button
+                    onClick={() => dispatch(addToCart(product))}
+                    className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                >
+                    Add to Cart
                 </button>
             )}
-
-            {counter(cart, product.id)> 0 && (
-                <div>
-                    {counter(cart, product.id)}
-                </div>
-            )}
-
-            {counter(cart, product.id) > 1 && (
-                <button onClick={() => dispatch(decrease(cart, product.id))}>
-                    <FaMinus size={15}/>
-                </button>
-            )}
-
-            {isInCart(cart, product.id) ? (
-                <button onClick={() => dispatch(increase(cart, product.id))}>
-                    <FaPlus size={15}/>
-                </button>
-            ):(
-              <button onClick={() => {
-
-                  dispatch(addToCart(cart, product))
-              }}>
-                  <div>add to cart</div>
-              </button>
-                )}
-
         </div>
-    )
+    );
 }
 
-export default Buttons
+export default Buttons;
