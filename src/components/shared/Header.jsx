@@ -1,7 +1,6 @@
 import React from 'react'
 import { FaShoppingCart } from "react-icons/fa";
 import { TbFolderHeart } from "react-icons/tb";
-import cartSlice from "../../features/cartSlice.js";
 
 function Header() {
     return (
@@ -26,7 +25,6 @@ function Header() {
                     <TbFolderHeart
                         size={22}
                         className={"text-white hover:cursor-pointer"}
-
                     />
                 </li>
             </ul>

@@ -1,6 +1,5 @@
 import React from 'react'
 import {Link} from "react-router-dom";
-import Buttons from "../shared/Buttons.jsx";
 
 function ProductCard({ product }) {
     const {image, category, title, price, id} = product;
@@ -20,11 +19,8 @@ function ProductCard({ product }) {
                    <div className={"text-blue-900"}>Price: </div>
                    <div>{price}$</div>
                </div>
-               <div>
+               <div className={"text-center"}>
                    <Link className={"text-decoration-none hover:!text-blue-900 !text-emerald-600" } to={`/products/${id}`}>Details</Link>
-               </div>
-               <div>
-                   <Buttons product={product} />
                </div>
            </div>
         </div>
