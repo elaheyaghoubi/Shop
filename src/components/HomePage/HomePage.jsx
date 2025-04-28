@@ -4,6 +4,7 @@ import { fetchProducts } from "../../features/getAllProductSlice.js";
 import { ClipLoader } from "react-spinners";
 import ProductCard from "./ProductCard.jsx";
 import Loading from "../shared/Loading.jsx";
+import CartPage from "../CartPage/CartPage.jsx";
 
 function HomePage() {
     const { loading, products, error } = useSelector((state) => state.products);

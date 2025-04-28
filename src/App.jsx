@@ -4,6 +4,7 @@ import Footer from "./components/shared/Footer.jsx";
 import {Routes, Route } from "react-router-dom";
 import HomePage from "./components/HomePage/HomePage.jsx";
 import DetailsPage from "./components/DetailsPage/DetailsPage.jsx";
+import CartPage from "./components/CartPage/CartPage.jsx";
 
 function App() {
     return (
@@ -12,6 +13,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/products/:id" element={<DetailsPage />} />
+                <Route path={"/cart"} element={<CartPage/>}/>
             </Routes>
             <Footer />
         </div>

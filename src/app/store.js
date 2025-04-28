@@ -9,12 +9,7 @@ const store = configureStore({
         details: getDetailsSlice,
         cart: cartSlice
     },
-    // Enable Redux DevTools with detailed tracing
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: false
-        }),
-    // devTools: process.env.NODE_ENV !== 'production'
+
 });
 
 export default store;
