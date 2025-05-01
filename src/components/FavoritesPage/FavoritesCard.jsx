@@ -1,7 +1,8 @@
 import React from 'react'
-import Buttons from "../shared/Buttons.jsx";
+import FavoriteButton from "../shared/FavoriteButton.jsx";
 
-function CartCard({data}) {
+function FavoritesCard({data}) {
+
     return (
         <div>
             <div className={"flex justify-around p-[1em] items-center"}>
@@ -26,14 +27,12 @@ function CartCard({data}) {
                     </div>
                 </div>
                 <div>
-                    <Buttons product={data} />
+                    <FavoriteButton product={data} />
                 </div>
-
-
             </div>
             <hr/>
         </div>
     )
 }
 
-export default CartCard
+export default FavoritesCard

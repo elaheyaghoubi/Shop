@@ -1,8 +1,9 @@
 import React from 'react'
 import {Link} from "react-router-dom";
 import Buttons from "../shared/Buttons.jsx";
+import FavoriteButton from "../shared/FavoriteButton.jsx";
 
-function ProductCard({ product }) {
+function ProductCard({product}) {
     const {image, category, title, price, id} = product;
 
     return (
@@ -10,21 +11,25 @@ function ProductCard({ product }) {
             <div className={"w-full]"}>
                 <img src={image} alt=""/>
             </div>
-           <div>
-               <div className={""}>{title}</div>
-               <div className={"flex gap-1"}>
-                   <div className={"text-blue-900 "}>Category: </div>
-                   <div>{category}</div>
-               </div>
-               <div className={"flex gap-1"}>
-                   <div className={"text-blue-900"}>Price: </div>
-                   <div>{price}$</div>
-               </div>
-               <div className={"text-center"}>
-                   <Link className={"text-decoration-none hover:!text-blue-900 !text-emerald-600" } to={`/products/${id}`}>Details</Link>
-               </div>
-               <Buttons product={product} />
-           </div>
+            <div>
+                <div className={""}>{title}</div>
+                <div className={"flex gap-1"}>
+                    <div className={"text-blue-900 "}>Category:</div>
+                    <div>{category}</div>
+                </div>
+                <div className={"flex gap-1"}>
+                    <div className={"text-blue-900"}>Price:</div>
+                    <div>{price}$</div>
+                </div>
+                <div className={"text-center"}>
+                    <Link className={"text-decoration-none hover:!text-blue-900 !text-emerald-600"}
+                          to={`/products/${id}`}>Details</Link>
+                </div>
+                <div className={"flex justify-between align-items-center"}>
+                    <Buttons product={product}/>
+                    <FavoriteButton product={product}/>
+                </div>
+            </div>
         </div>
     )
 }

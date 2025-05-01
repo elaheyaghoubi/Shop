@@ -29,10 +29,12 @@ function Header() {
                     </Link>
                 </li>
                 <li>
-                    <TbFolderHeart
-                        size={22}
-                        className={"text-white hover:cursor-pointer"}
-                    />
+                    <Link to={`/favorites`}>
+                        <TbFolderHeart
+                            size={22}
+                            className={"text-white hover:cursor-pointer"}
+                        />
+                    </Link>
                 </li>
             </ul>
         </div>
